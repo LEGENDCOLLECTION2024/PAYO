@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background-image: url('image\ \(58\).png'); /* Cambia 'ruta/a/tu/imagen.jpg' por la ruta de tu imagen */
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh; /* Cambiado a min-height para que el fondo se extienda hasta el final de la página */
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.8); /* Ajusta la opacidad del fondo del encabezado */
+      justify-content: space-between;
+      align-items: center;
+      padding: 35px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 150px;
+      margin-right: 10px;
+    }
+
+    nav a {
+      font-weight: 600;
+      padding-right: 10px;
+    }
+
+    nav a:hover {
+      color: rgb(255, 255, 1);
+    }
+
+    @media (max-width: 700px) {
+      header {
+          flex-direction: column;
+      }
+      nav {
+          padding: 5px 0px;
+      }
+    }
+
+    /* Estilos para el mensaje de felicitaciones */
+    .congratulations {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1); /* Escala inicial */
+      text-align: center;
+      color: rgba(242, 255, 0, 0.9); /* Añadido un poco de opacidad */
+      font-family: 'Bangers', cursive;
+      z-index: 1;
+      padding: 20px; /* Añadido un espacio de relleno alrededor del texto */
+      background-color: rgba(0, 0, 0, 0.8); /* Color de fondo del cuadro más oscuro */
+      border-radius: 10px; /* Bordes redondeados */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra alrededor del cuadro */
+      transition: transform 0.3s ease; /* Transición para el cambio de tamaño */
+      cursor: pointer; /* Cambia el cursor al pasar sobre el cuadro */
+    }
+
+    .congratulations:hover {
+      transform: translate(-50%, -50%) scale(1.1); /* Aumenta el tamaño del cuadro al pasar el cursor sobre él */
+    }
+
+    /* Estilos para la imagen de fondo */
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%; /* Cambiado para que ocupe toda la altura de la página */
+      opacity: 1; /* Cambia la opacidad de la imagen de fondo según lo necesites */
+    }
+
+    /* Animación de confeti */
+    @keyframes confetti {
+      0% {
+        transform: translateY(0) rotate(0);
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+      }
+    }
+
+    /* Estilos para los elementos de confeti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: confetti 3s linear infinite;
+    }
+
+    /* Distribución aleatoria de confetis */
+    @keyframes spreadConfetti {
+      0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(calc(-100vh + 100px)) translateX(calc(100vw - 100px));
+      }
+    }
+
+    /* Estilos para los confetis de diferentes colores */
+    .confetti-purple {
+      background-color: purple; /* Color morado */
+    }
+
+    .confetti-black {
+      background-color: black; /* Color negro */
+    }
+
+    .confetti-white {
+      background-color: white; /* Color blanco */
+    }
+
+    .confetti-red {
+      background-color: red; /* Color rojo */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="file:///C:/Users/High%20school%2024/Downloads/paco/index.html" class="logo">
+      <img src="descarga.png" alt="logo de la compañia">
+      <h2 class="nombre-empresa">Legend Collection</h2>
+    </a>
+    <nav>
+      <a href="file:///C:/Users/High%20school%2024/Downloads/paco/mata%20furros/mt.html" class="nav-link">Our Collection</a>
+      <a href="file:///C:/Users/High%20school%2024/Downloads/paco/About.us/.html" class="nav-link">About us</a>
+      <a href="file:///C:/Users/High%20school%2024/Downloads/paco/Log%20in/login.html#" class="nav-link">Log in</a>
+    </nav>
+  </header>
+
+  <img src="Captura de pantalla 2024-04-08 192850.png" alt="Background Image" class="background-image">
+
+  <div class="congratulations" onclick="showConfetti()">
+    <h2>Congratulations!</h2>
+    <p>You have been admitted to the Legend family. You've always been a part of this great family. Explore our store now!</p>
+  </div>
+
+  <!-- Función para mostrar el confeti -->
+  <script>
+    function showConfetti() {
+      const colors = ['purple', 'black', 'white', 'red']; // Array de colores de confeti disponibles
+      const confettiContainer = document.createElement('div');
+      confettiContainer.classList.add('confetti-container');
+
+      // Crea y añade 100 elementos de confeti al contenedor
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        const randomColor = colors[Math.floor(Math.random() * colors.length)]; // Elige un color aleatorio del array
+        confetti.classList.add('confetti', 'confetti-' + randomColor);
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDelay = Math.random() + 's';
+        confettiContainer.appendChild(confetti);
+      }
+
+      document.body.appendChild(confettiContainer);
+
+      // Elimina el contenedor de confeti después de 10 segundos
+      setTimeout(() => {
+        confettiContainer.remove();
+      }, 10000000);
+    }
+  </script>
+</body>
+</html>
